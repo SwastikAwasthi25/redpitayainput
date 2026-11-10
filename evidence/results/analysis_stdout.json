@@ -1,0 +1,43 @@
+{
+  "measurement_scope": "single 4096-sample ILA1 capture per firmware version",
+  "assumed_sample_rate_hz": 125000000,
+  "signal_generator_nominal_hz": 5000000,
+  "comparison_note": "Old signal appears on CH1; corrected signal on CH0. Physical SMA channel was not independently confirmed. Two different captures; not a controlled same-channel A/B test.",
+  "hardware_signoff": false,
+  "original": {
+    "source_csv": "original_5mhz_ch01.csv",
+    "active_channel": 1,
+    "sample_count": 4096,
+    "counter_continuous": true,
+    "status_values_hex": [
+      "0xF"
+    ],
+    "raw_signed_xor_1fff": true,
+    "dominant_fft_bin_hz": 15014648.44,
+    "signed_min_codes": -7097,
+    "signed_max_codes": 6842,
+    "fitted_frequency_hz": 5000181.876,
+    "r2": 0.1524538846037954,
+    "residual_rms_codes": 3459.833617092568,
+    "amplitude_peak_codes": 2074.6235113140924,
+    "dc_offset_codes": 140.38389235138507
+  },
+  "corrected": {
+    "source_csv": "corrected_5mhz_ch01.csv",
+    "active_channel": 0,
+    "sample_count": 4096,
+    "counter_continuous": true,
+    "status_values_hex": [
+      "0xF"
+    ],
+    "raw_signed_xor_1fff": true,
+    "dominant_fft_bin_hz": 5004882.81,
+    "signed_min_codes": -4525,
+    "signed_max_codes": 4636,
+    "fitted_frequency_hz": 5000064.241,
+    "r2": 0.9999913754540293,
+    "residual_rms_codes": 9.504184460801776,
+    "amplitude_peak_codes": 4576.553332145326,
+    "dc_offset_codes": 49.62497766540395
+  }
+}

@@ -1,0 +1,25 @@
+# Vivado generated and local build state (not the original source snapshot)
+*.jou
+*.str
+*.pb
+*.wdb
+*.wcfg
+*.dcp
+*.cache/
+*.runs/
+*.hw/
+*.ip_user_files/
+*.sim/
+*.Xil/
+.Xil/
+*.log
+!evidence/reports/*.log
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+# Sensitive machine-specific audit files
+exports/local_paths_private.json
+# Script-generated output
+*.tmp

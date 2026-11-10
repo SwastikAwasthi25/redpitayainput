@@ -1,0 +1,373 @@
+
+*** Running vivado
+    with args -log adc_system_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source adc_system_top.tcl
+
+
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Tue Nov 10 19:34:17 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source adc_system_top.tcl -notrace
+create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:05 . Memory (MB): peak = 540.215 ; gain = 221.070
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/2025.2/Vivado/data/ip'.
+Command: synth_design -top adc_system_top -part xc7z020clg400-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 23512
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 1362.520 ; gain = 539.039
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'adc_system_top' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_system_top.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'adc_ps_startup_wrapper' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/hdl/adc_ps_startup_wrapper.v:13]
+INFO: [Synth 8-6157] synthesizing module 'adc_ps_startup' [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/synth/adc_ps_startup.v:13]
+INFO: [Synth 8-6157] synthesizing module 'adc_ps_startup_processing_system7_0_0' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.runs/synth_adc_fix_200/.Xil/Vivado-7444-LAPTOP-15KE8P6M/realtime/adc_ps_startup_processing_system7_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'adc_ps_startup_processing_system7_0_0' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.runs/synth_adc_fix_200/.Xil/Vivado-7444-LAPTOP-15KE8P6M/realtime/adc_ps_startup_processing_system7_0_0_stub.v:6]
+WARNING: [Synth 8-7071] port 'GPIO_O' of module 'adc_ps_startup_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/synth/adc_ps_startup.v:86]
+WARNING: [Synth 8-7071] port 'GPIO_T' of module 'adc_ps_startup_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/synth/adc_ps_startup.v:86]
+WARNING: [Synth 8-7071] port 'TTC0_WAVE0_OUT' of module 'adc_ps_startup_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/synth/adc_ps_startup.v:86]
+WARNING: [Synth 8-7071] port 'TTC0_WAVE1_OUT' of module 'adc_ps_startup_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/synth/adc_ps_startup.v:86]
+WARNING: [Synth 8-7071] port 'TTC0_WAVE2_OUT' of module 'adc_ps_startup_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/synth/adc_ps_startup.v:86]
+WARNING: [Synth 8-7071] port 'USB0_PORT_INDCTL' of module 'adc_ps_startup_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/synth/adc_ps_startup.v:86]
+WARNING: [Synth 8-7071] port 'USB0_VBUS_PWRSELECT' of module 'adc_ps_startup_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/synth/adc_ps_startup.v:86]
+WARNING: [Synth 8-7071] port 'FCLK_CLK1' of module 'adc_ps_startup_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/synth/adc_ps_startup.v:86]
+WARNING: [Synth 8-7071] port 'FCLK_CLK2' of module 'adc_ps_startup_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/synth/adc_ps_startup.v:86]
+WARNING: [Synth 8-7071] port 'FCLK_CLK3' of module 'adc_ps_startup_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/synth/adc_ps_startup.v:86]
+WARNING: [Synth 8-7071] port 'FCLK_RESET1_N' of module 'adc_ps_startup_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/synth/adc_ps_startup.v:86]
+WARNING: [Synth 8-7071] port 'FCLK_RESET2_N' of module 'adc_ps_startup_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/synth/adc_ps_startup.v:86]
+WARNING: [Synth 8-7071] port 'FCLK_RESET3_N' of module 'adc_ps_startup_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/synth/adc_ps_startup.v:86]
+WARNING: [Synth 8-7023] instance 'processing_system7_0' of module 'adc_ps_startup_processing_system7_0_0' has 39 connections declared, but only 26 given [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/synth/adc_ps_startup.v:86]
+INFO: [Synth 8-6155] done synthesizing module 'adc_ps_startup' (0#1) [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/synth/adc_ps_startup.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'adc_ps_startup_wrapper' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/hdl/adc_ps_startup_wrapper.v:13]
+INFO: [Synth 8-6157] synthesizing module 'adc_spi_ila_bridge' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_spi_ila_bridge.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'adc_spi_init' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_spi_init.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'spi_master' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/spi_master.v:10]
+	Parameter RST_ACT_LVL bound to: 0 - type: integer 
+	Parameter NUM_OF_CS bound to: 1 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'spi_master' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/spi_master.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'adc_spi_init' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_spi_init.sv:3]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_spi_ila_bridge.sv:59]
+INFO: [Synth 8-6157] synthesizing module 'adc_ila_top' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_ila_top.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'adc_frontend_top' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_frontend_top.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'adc_clock_top' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_clock_top.sv:5]
+INFO: [Synth 8-6157] synthesizing module 'IBUFDS' [D:/2025.2/Vivado/scripts/rt/data/unisim_comp.v:82819]
+INFO: [Synth 8-6155] done synthesizing module 'IBUFDS' (0#1) [D:/2025.2/Vivado/scripts/rt/data/unisim_comp.v:82819]
+INFO: [Synth 8-6157] synthesizing module 'BUFR' [D:/2025.2/Vivado/scripts/rt/data/unisim_comp.v:3017]
+	Parameter BUFR_DIVIDE bound to: BYPASS - type: string 
+	Parameter SIM_DEVICE bound to: 7SERIES - type: string 
+INFO: [Synth 8-6155] done synthesizing module 'BUFR' (0#1) [D:/2025.2/Vivado/scripts/rt/data/unisim_comp.v:3017]
+INFO: [Synth 8-6157] synthesizing module 'adc_clk_wiz_01' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.runs/synth_adc_fix_200/.Xil/Vivado-7444-LAPTOP-15KE8P6M/realtime/adc_clk_wiz_01_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'adc_clk_wiz_01' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.runs/synth_adc_fix_200/.Xil/Vivado-7444-LAPTOP-15KE8P6M/realtime/adc_clk_wiz_01_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'BUFG' [D:/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2678]
+INFO: [Synth 8-6155] done synthesizing module 'BUFG' (0#1) [D:/2025.2/Vivado/scripts/rt/data/unisim_comp.v:2678]
+INFO: [Synth 8-6157] synthesizing module 'adc_clk_wiz_23' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.runs/synth_adc_fix_200/.Xil/Vivado-7444-LAPTOP-15KE8P6M/realtime/adc_clk_wiz_23_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'adc_clk_wiz_23' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.runs/synth_adc_fix_200/.Xil/Vivado-7444-LAPTOP-15KE8P6M/realtime/adc_clk_wiz_23_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'adc_idelay_reset_seq' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_idelay_reset_seq.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'adc_idelay_reset_seq' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_idelay_reset_seq.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'adc_clock_top' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_clock_top.sv:5]
+INFO: [Synth 8-6157] synthesizing module 'adc_capture_core' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_capture_core.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'adc_input_delay' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_input_delay.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'IDELAYE2' [D:/2025.2/Vivado/scripts/rt/data/unisim_comp.v:85109]
+	Parameter CINVCTRL_SEL bound to: FALSE - type: string 
+	Parameter DELAY_SRC bound to: IDATAIN - type: string 
+	Parameter HIGH_PERFORMANCE_MODE bound to: TRUE - type: string 
+	Parameter IDELAY_TYPE bound to: FIXED - type: string 
+	Parameter IDELAY_VALUE bound to: 4 - type: integer 
+	Parameter PIPE_SEL bound to: FALSE - type: string 
+	Parameter REFCLK_FREQUENCY bound to: 2.000000e+02 - type: double 
+	Parameter SIGNAL_PATTERN bound to: DATA - type: string 
+INFO: [Synth 8-6155] done synthesizing module 'IDELAYE2' (0#1) [D:/2025.2/Vivado/scripts/rt/data/unisim_comp.v:85109]
+INFO: [Synth 8-6157] synthesizing module 'IDELAYCTRL' [D:/2025.2/Vivado/scripts/rt/data/unisim_comp.v:85096]
+INFO: [Synth 8-6155] done synthesizing module 'IDELAYCTRL' (0#1) [D:/2025.2/Vivado/scripts/rt/data/unisim_comp.v:85096]
+INFO: [Synth 8-6155] done synthesizing module 'adc_input_delay' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_input_delay.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'adc_ddr_unpack' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_ddr_unpack.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'IDDR' [D:/2025.2/Vivado/scripts/rt/data/unisim_comp.v:84974]
+	Parameter DDR_CLK_EDGE bound to: SAME_EDGE_PIPELINED - type: string 
+	Parameter INIT_Q1 bound to: 1'b0 
+	Parameter INIT_Q2 bound to: 1'b0 
+	Parameter SRTYPE bound to: SYNC - type: string 
+INFO: [Synth 8-6155] done synthesizing module 'IDDR' (0#1) [D:/2025.2/Vivado/scripts/rt/data/unisim_comp.v:84974]
+INFO: [Synth 8-6155] done synthesizing module 'adc_ddr_unpack' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_ddr_unpack.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'adc_sample_format' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_sample_format.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'adc_sample_format' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_sample_format.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'adc_capture_core' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_capture_core.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'adc_frontend_top' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_frontend_top.sv:3]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_ila_top.sv:140]
+INFO: [Synth 8-6157] synthesizing module 'adc_ila_12' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.runs/synth_adc_fix_200/.Xil/Vivado-7444-LAPTOP-15KE8P6M/realtime/adc_ila_12_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'adc_ila_12' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.runs/synth_adc_fix_200/.Xil/Vivado-7444-LAPTOP-15KE8P6M/realtime/adc_ila_12_stub.v:6]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_ila_top.sv:151]
+INFO: [Synth 8-6157] synthesizing module 'adc_ila_34' [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.runs/synth_adc_fix_200/.Xil/Vivado-7444-LAPTOP-15KE8P6M/realtime/adc_ila_34_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'adc_ila_34' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.runs/synth_adc_fix_200/.Xil/Vivado-7444-LAPTOP-15KE8P6M/realtime/adc_ila_34_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'adc_ila_top' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_ila_top.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'adc_spi_ila_bridge' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_spi_ila_bridge.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'adc_system_top' (0#1) [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_system_top.sv:3]
+INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'u_frontend'. This will prevent further optimization [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_ila_top.sv:24]
+INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'u_ila_12'. This will prevent further optimization [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_ila_top.sv:140]
+INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'u_ila_34'. This will prevent further optimization [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.srcs/sources_1/imports/rtl/adc_ila_top.sv:151]
+WARNING: [Synth 8-7129] Port startup_resetn in module adc_idelay_reset_seq is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1491.359 ; gain = 667.879
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1491.359 ; gain = 667.879
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1491.359 ; gain = 667.879
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 1491.359 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 60 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/ip/adc_ps_startup_processing_system7_0_0/adc_ps_startup_processing_system7_0_0/adc_ps_startup_processing_system7_0_0_in_context.xdc] for cell 'u_ps/adc_ps_startup_i/processing_system7_0'
+Finished Parsing XDC File [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/bd/adc_ps_startup/ip/adc_ps_startup_processing_system7_0_0/adc_ps_startup_processing_system7_0_0/adc_ps_startup_processing_system7_0_0_in_context.xdc] for cell 'u_ps/adc_ps_startup_i/processing_system7_0'
+Parsing XDC File [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/ip/adc_clk_wiz_01/adc_clk_wiz_01/adc_clk_wiz_01_in_context.xdc] for cell 'u_adc_bridge/u_adc_ila/u_frontend/u_adc_clocks/u_clk_01'
+Finished Parsing XDC File [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/ip/adc_clk_wiz_01/adc_clk_wiz_01/adc_clk_wiz_01_in_context.xdc] for cell 'u_adc_bridge/u_adc_ila/u_frontend/u_adc_clocks/u_clk_01'
+Parsing XDC File [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/ip/adc_clk_wiz_23/adc_clk_wiz_23/adc_clk_wiz_23_in_context.xdc] for cell 'u_adc_bridge/u_adc_ila/u_frontend/u_adc_clocks/u_clk_23'
+Finished Parsing XDC File [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/ip/adc_clk_wiz_23/adc_clk_wiz_23/adc_clk_wiz_23_in_context.xdc] for cell 'u_adc_bridge/u_adc_ila/u_frontend/u_adc_clocks/u_clk_23'
+Parsing XDC File [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/ip/adc_ila_34/adc_ila_34/adc_ila_34_in_context.xdc] for cell 'u_adc_bridge/u_adc_ila/u_ila_34'
+Finished Parsing XDC File [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/ip/adc_ila_34/adc_ila_34/adc_ila_34_in_context.xdc] for cell 'u_adc_bridge/u_adc_ila/u_ila_34'
+Parsing XDC File [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/ip/adc_ila_12/adc_ila_12/adc_ila_34_in_context.xdc] for cell 'u_adc_bridge/u_adc_ila/u_ila_12'
+Finished Parsing XDC File [d:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.gen/sources_1/ip/adc_ila_12/adc_ila_12/adc_ila_34_in_context.xdc] for cell 'u_adc_bridge/u_adc_ila/u_ila_12'
+Parsing XDC File [D:/rp-adc-ila-puzzle-trial/adc_input_clocks_153.xdc]
+Finished Parsing XDC File [D:/rp-adc-ila-puzzle-trial/adc_input_clocks_153.xdc]
+Parsing XDC File [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.runs/synth_adc_fix_200/dont_touch.xdc]
+Finished Parsing XDC File [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.runs/synth_adc_fix_200/dont_touch.xdc]
+Parsing XDC File [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_validation_trial_169/adc_ddr_trial_184.xdc]
+Finished Parsing XDC File [D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_validation_trial_169/adc_ddr_trial_184.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1564.477 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.039 . Memory (MB): peak = 1564.477 ; gain = 0.000
+WARNING: [Timing 38-316] Clock period '10.000' specified during out-of-context synthesis of instance 'u_adc_bridge/u_adc_ila/u_ila_12' at clock pin 'clk' is different from the actual clock period '8.000', this can lead to different synthesis results.
+WARNING: [Timing 38-316] Clock period '10.000' specified during out-of-context synthesis of instance 'u_adc_bridge/u_adc_ila/u_ila_34' at clock pin 'clk' is different from the actual clock period '8.000', this can lead to different synthesis results.
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 1565.203 ; gain = 741.723
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 1565.203 ; gain = 741.723
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:28 ; elapsed = 00:00:30 . Memory (MB): peak = 1565.203 ; gain = 741.723
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'adc_spi_init'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                ST_DELAY |                              000 |                              000
+                ST_START |                              001 |                              001
+            ST_WAIT_BUSY |                              010 |                              010
+            ST_WAIT_IDLE |                              011 |                              011
+                 ST_DONE |                              100 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'adc_spi_init'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:29 ; elapsed = 00:00:31 . Memory (MB): peak = 1565.203 ; gain = 741.723
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   24 Bit       Adders := 1     
+	   2 Input   16 Bit       Adders := 2     
+	   2 Input    9 Bit       Adders := 1     
+	   2 Input    7 Bit       Adders := 1     
+	   2 Input    5 Bit       Adders := 2     
+	   2 Input    2 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 1     
+	               16 Bit    Registers := 6     
+	                9 Bit    Registers := 1     
+	                7 Bit    Registers := 1     
+	                5 Bit    Registers := 2     
+	                4 Bit    Registers := 4     
+	                3 Bit    Registers := 4     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 14    
++---Muxes : 
+	   2 Input   16 Bit        Muxes := 2     
+	   2 Input    9 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 2     
+	   4 Input    4 Bit        Muxes := 1     
+	   5 Input    3 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 2     
+	   4 Input    3 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 12    
+	   5 Input    1 Bit        Muxes := 4     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:34 . Memory (MB): peak = 1565.203 ; gain = 741.723
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:42 ; elapsed = 00:00:44 . Memory (MB): peak = 1691.031 ; gain = 867.551
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:42 ; elapsed = 00:00:44 . Memory (MB): peak = 1691.734 ; gain = 868.254
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:42 ; elapsed = 00:00:45 . Memory (MB): peak = 1720.367 ; gain = 896.887
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:49 ; elapsed = 00:00:52 . Memory (MB): peak = 1950.293 ; gain = 1126.812
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:49 ; elapsed = 00:00:52 . Memory (MB): peak = 1950.293 ; gain = 1126.812
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:49 ; elapsed = 00:00:52 . Memory (MB): peak = 1950.293 ; gain = 1126.812
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:49 ; elapsed = 00:00:52 . Memory (MB): peak = 1950.293 ; gain = 1126.812
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:49 ; elapsed = 00:00:52 . Memory (MB): peak = 1950.293 ; gain = 1126.812
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:49 ; elapsed = 00:00:52 . Memory (MB): peak = 1950.293 ; gain = 1126.812
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------------------------------+----------+
+|      |BlackBox name                         |Instances |
++------+--------------------------------------+----------+
+|1     |adc_clk_wiz_01                        |         1|
+|2     |adc_clk_wiz_23                        |         1|
+|3     |adc_ila_12                            |         1|
+|4     |adc_ila_34                            |         1|
+|5     |adc_ps_startup_processing_system7_0_0 |         1|
++------+--------------------------------------+----------+
+
+Report Cell Usage: 
++------+------------------------------------+------+
+|      |Cell                                |Count |
++------+------------------------------------+------+
+|1     |adc_clk_wiz                         |     2|
+|3     |adc_ila                             |     2|
+|5     |adc_ps_startup_processing_system7_0 |     1|
+|6     |BUFG                                |     1|
+|7     |BUFR                                |     2|
+|8     |CARRY4                              |    14|
+|9     |IDDR                                |    28|
+|10    |IDELAYCTRL                          |     1|
+|11    |IDELAYE2                            |    28|
+|12    |LUT1                                |    65|
+|13    |LUT2                                |    14|
+|14    |LUT3                                |    41|
+|15    |LUT4                                |    12|
+|16    |LUT5                                |    16|
+|17    |LUT6                                |    16|
+|18    |FDCE                                |    91|
+|19    |FDPE                                |     1|
+|20    |FDRE                                |    38|
+|21    |FDSE                                |     3|
+|22    |IBUF                                |    28|
+|23    |IBUFDS                              |     2|
+|24    |OBUF                                |     4|
++------+------------------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:49 ; elapsed = 00:00:52 . Memory (MB): peak = 1950.293 ; gain = 1126.812
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:32 ; elapsed = 00:00:47 . Memory (MB): peak = 1950.293 ; gain = 1052.969
+Synthesis Optimization Complete : Time (s): cpu = 00:00:49 ; elapsed = 00:00:52 . Memory (MB): peak = 1950.293 ; gain = 1126.812
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.018 . Memory (MB): peak = 1950.293 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 74 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1957.488 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 448ffc55
+INFO: [Common 17-83] Releasing license: Synthesis
+74 Infos, 20 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:56 ; elapsed = 00:01:04 . Memory (MB): peak = 1957.488 ; gain = 1365.941
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1957.488 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_clock_sandbox.runs/synth_adc_fix_200/adc_system_top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file adc_system_top_utilization_synth.rpt -pb adc_system_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Nov 10 19:35:38 2026...

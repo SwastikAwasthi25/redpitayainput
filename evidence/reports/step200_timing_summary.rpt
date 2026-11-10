@@ -1,0 +1,243 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Tue Nov 10 19:38:44 2026
+| Host         : LAPTOP-15KE8P6M running 64-bit major release  (build 9200)
+| Command      : report_timing_summary -delay_type min_max -report_unconstrained -no_detailed_paths -file D:/rp-adc-ila-puzzle-trial/adc_clock_sandbox/adc_validation_trial_169/step200_timing_summary.rpt
+| Design       : adc_system_top
+| Device       : 7z020-clg400
+| Speed File   : -1  PRODUCTION 1.12 2019-11-22
+| Design State : Routed
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Summary Report
+
+------------------------------------------------------------------------------------------------
+| Timer Settings
+| --------------
+------------------------------------------------------------------------------------------------
+
+  Enable Multi Corner Analysis               :  Yes
+  Enable Pessimism Removal                   :  Yes
+  Pessimism Removal Resolution               :  Nearest Common Node
+  Enable Input Delay Default Clock           :  No
+  Enable Preset / Clear Arcs                 :  No
+  Disable Flight Delays                      :  No
+  Ignore I/O Paths                           :  No
+  Timing Early Launch at Borrowing Latches   :  No
+  Borrow Time for Max Delay Exceptions       :  Yes
+  Merge Timing Exceptions                    :  Yes
+  Inter-SLR Compensation                     :  Conservative
+
+  Corner  Analyze    Analyze    
+  Name    Max Paths  Min Paths  
+  ------  ---------  ---------  
+  Slow    Yes        Yes        
+  Fast    Yes        Yes        
+
+
+------------------------------------------------------------------------------------------------
+| Report Methodology
+| ------------------
+------------------------------------------------------------------------------------------------
+
+Rule       Severity  Description                                  Violations  
+---------  --------  -------------------------------------------  ----------  
+LUTAR-1    Warning   LUT drives async reset alert                 4           
+TIMING-9   Warning   Unknown CDC Logic                            1           
+TIMING-18  Warning   Missing input or output delay                4           
+XDCB-5     Warning   Runtime inefficient way to find pin objects  4           
+
+Note: This report is based on the most recent report_methodology run and may not be up-to-date. Run report_methodology on the current design for the latest report.
+
+
+
+check_timing report
+
+Table of Contents
+-----------------
+1. checking no_clock (0)
+2. checking constant_clock (0)
+3. checking pulse_width_clock (0)
+4. checking unconstrained_internal_endpoints (0)
+5. checking no_input_delay (0)
+6. checking no_output_delay (4)
+7. checking multiple_clock (0)
+8. checking generated_clocks (0)
+9. checking loops (0)
+10. checking partial_input_delay (0)
+11. checking partial_output_delay (0)
+12. checking latch_loops (0)
+
+1. checking no_clock (0)
+------------------------
+ There are 0 register/latch pins with no clock.
+
+
+2. checking constant_clock (0)
+------------------------------
+ There are 0 register/latch pins with constant_clock.
+
+
+3. checking pulse_width_clock (0)
+---------------------------------
+ There are 0 register/latch pins which need pulse_width check
+
+
+4. checking unconstrained_internal_endpoints (0)
+------------------------------------------------
+ There are 0 pins that are not constrained for maximum delay.
+
+ There are 0 pins that are not constrained for maximum delay due to constant clock.
+
+
+5. checking no_input_delay (0)
+------------------------------
+ There are 0 input ports with no input delay specified.
+
+ There are 0 input ports with no input delay but user has a false path constraint.
+
+
+6. checking no_output_delay (4)
+-------------------------------
+ There are 4 ports with no output delay specified. (HIGH)
+
+ There are 0 ports with no output delay but user has a false path constraint
+
+ There are 0 ports with no output delay but with a timing clock defined on it or propagating through it
+
+
+7. checking multiple_clock (0)
+------------------------------
+ There are 0 register/latch pins with multiple clocks.
+
+
+8. checking generated_clocks (0)
+--------------------------------
+ There are 0 generated clocks that are not connected to a clock source.
+
+
+9. checking loops (0)
+---------------------
+ There are 0 combinational loops in the design.
+
+
+10. checking partial_input_delay (0)
+------------------------------------
+ There are 0 input ports with partial input delay specified.
+
+
+11. checking partial_output_delay (0)
+-------------------------------------
+ There are 0 ports with partial output delay specified.
+
+
+12. checking latch_loops (0)
+----------------------------
+ There are 0 combinational latch loops in the design through latch input
+
+
+
+------------------------------------------------------------------------------------------------
+| Design Timing Summary
+| ---------------------
+------------------------------------------------------------------------------------------------
+
+    WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+    -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+      1.139        0.000                      0                 7946        0.035        0.000                      0                 7930        0.264        0.000                       0                  4703  
+
+
+All user specified timing constraints are met.
+
+
+------------------------------------------------------------------------------------------------
+| Clock Summary
+| -------------
+------------------------------------------------------------------------------------------------
+
+Clock                                                                                       Waveform(ns)         Period(ns)      Frequency(MHz)
+-----                                                                                       ------------         ----------      --------------
+adc_clk0_in                                                                                 {0.000 4.000}        8.000           125.000         
+  clk_out2_adc_clk_wiz_01                                                                   {0.000 2.500}        5.000           200.000         
+  clkfbout_adc_clk_wiz_01                                                                   {0.000 4.000}        8.000           125.000         
+adc_clk1_in                                                                                 {0.000 4.000}        8.000           125.000         
+  clkfbout_adc_clk_wiz_23                                                                   {0.000 4.000}        8.000           125.000         
+clk_fpga_0                                                                                  {0.000 4.000}        8.000           125.000         
+clk_fpga_1                                                                                  {0.000 2.000}        4.000           250.000         
+clk_fpga_2                                                                                  {0.000 10.000}       20.000          50.000          
+clk_fpga_3                                                                                  {0.000 2.500}        5.000           200.000         
+dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/SERIES7_BSCAN.bscan_inst/TCK  {0.000 16.500}       33.000          30.303          
+
+
+------------------------------------------------------------------------------------------------
+| Intra Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+Clock                                                                                           WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+-----                                                                                           -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+adc_clk0_in                                                                                       1.139        0.000                      0                  838        0.035        0.000                      0                  838        2.000        0.000                       0                   583  
+  clk_out2_adc_clk_wiz_01                                                                         2.482        0.000                      0                   28        0.131        0.000                      0                   28        0.264        0.000                       0                    17  
+  clkfbout_adc_clk_wiz_01                                                                                                                                                                                                                     5.845        0.000                       0                     3  
+adc_clk1_in                                                                                       1.145        0.000                      0                 5759        0.057        0.000                      0                 5759        2.000        0.000                       0                  3543  
+  clkfbout_adc_clk_wiz_23                                                                                                                                                                                                                     5.845        0.000                       0                     3  
+clk_fpga_0                                                                                        3.053        0.000                      0                  112        0.182        0.000                      0                  112        3.500        0.000                       0                    67  
+dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/SERIES7_BSCAN.bscan_inst/TCK       26.118        0.000                      0                  933        0.101        0.000                      0                  933       15.250        0.000                       0                   487  
+
+
+------------------------------------------------------------------------------------------------
+| Inter Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+From Clock                                                                                  To Clock                                                                                        WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------                                                                                  --------                                                                                        -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/SERIES7_BSCAN.bscan_inst/TCK  adc_clk1_in                                                                                      31.500        0.000                      0                    8                                                                        
+adc_clk1_in                                                                                 dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/SERIES7_BSCAN.bscan_inst/TCK        6.565        0.000                      0                    8                                                                        
+
+
+------------------------------------------------------------------------------------------------
+| Other Path Groups Table
+| -----------------------
+------------------------------------------------------------------------------------------------
+
+Path Group                                                                                  From Clock                                                                                  To Clock                                                                                        WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------                                                                                  ----------                                                                                  --------                                                                                        -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+**async_default**                                                                           adc_clk0_in                                                                                 adc_clk0_in                                                                                       4.201        0.000                      0                   24        0.674        0.000                      0                   24  
+**async_default**                                                                           adc_clk1_in                                                                                 adc_clk1_in                                                                                       4.741        0.000                      0                  135        0.347        0.000                      0                  135  
+**async_default**                                                                           clk_out2_adc_clk_wiz_01                                                                     clk_out2_adc_clk_wiz_01                                                                           2.686        0.000                      0                    1        0.694        0.000                      0                    1  
+**async_default**                                                                           dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/SERIES7_BSCAN.bscan_inst/TCK  dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/SERIES7_BSCAN.bscan_inst/TCK       27.862        0.000                      0                  100        0.332        0.000                      0                  100  
+
+
+------------------------------------------------------------------------------------------------
+| User Ignored Path Table
+| -----------------------
+------------------------------------------------------------------------------------------------
+
+Path Group                                                                                  From Clock                                                                                  To Clock                                                                                  
+----------                                                                                  ----------                                                                                  --------                                                                                  
+(none)                                                                                      adc_clk1_in                                                                                 adc_clk0_in                                                                                 
+(none)                                                                                      clk_out2_adc_clk_wiz_01                                                                     adc_clk0_in                                                                                 
+(none)                                                                                      adc_clk0_in                                                                                 adc_clk1_in                                                                                 
+(none)                                                                                      adc_clk1_in                                                                                 adc_clk1_in                                                                                 
+(none)                                                                                      clk_out2_adc_clk_wiz_01                                                                     adc_clk1_in                                                                                 
+(none)                                                                                      dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/SERIES7_BSCAN.bscan_inst/TCK  adc_clk1_in                                                                                 
+(none)                                                                                      adc_clk1_in                                                                                 dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/SERIES7_BSCAN.bscan_inst/TCK  
+
+
+------------------------------------------------------------------------------------------------
+| Unconstrained Path Table
+| ------------------------
+------------------------------------------------------------------------------------------------
+
+Path Group                                                                                  From Clock                                                                                  To Clock                                                                                  
+----------                                                                                  ----------                                                                                  --------                                                                                  
+(none)                                                                                      clk_fpga_0                                                                                                                                                                              
+(none)                                                                                                                                                                                  adc_clk0_in                                                                                 
+(none)                                                                                                                                                                                  adc_clk1_in                                                                                 
+(none)                                                                                                                                                                                  clk_fpga_0                                                                                  
+(none)                                                                                                                                                                                  clk_out2_adc_clk_wiz_01                                                                     
+(none)                                                                                                                                                                                  dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/SERIES7_BSCAN.bscan_inst/TCK  
+
+

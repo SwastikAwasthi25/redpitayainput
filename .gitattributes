@@ -1,0 +1,15 @@
+*.bit binary
+*.ltx text
+*.csv text eol=lf
+*.png binary
+*.xci text
+*.xdc text
+*.sv text
+*.v text
+*.bd text
+
+# Preserve exact exported FPGA file bytes and SHA-256 integrity
+fpga/** -text
+
+# Preserve captured evidence byte-for-byte
+evidence/** -text
