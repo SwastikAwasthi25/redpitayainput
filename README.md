@@ -129,3 +129,19 @@ This is a controlled **validation sandbox**; it is not a full production receive
 ### Pre-publication checks
 
 After export, run `python scripts/audit_for_sharing.py` and review its findings manually. For a guided **new private** GitHub repo creation from Windows, see `scripts/publish_private.ps1`; it requires Git, GitHub CLI authentication, and an explicit confirmation before pushing.
+
+## Verified fresh-clone rebuild
+
+A fresh local Git clone of commit `c3228aa` was rebuilt
+successfully with Vivado 2025.2 on Windows, without opening
+the original working Vivado project.
+
+The tested source-based build script is available at
+`scripts/vivado_clean_rebuild.tcl`.
+
+See [fresh-clone build instructions and measured results](docs/FRESH_CLONE_BUILD.md).
+
+This confirms reproducibility on the tested PC, not yet
+across different computers or hardware configurations.
+The new rebuilt bitstream has not undergone a separate
+hardware retest.

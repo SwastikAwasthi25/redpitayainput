@@ -26,7 +26,7 @@ In Vivado on the Windows PC, verify the original recorded runs and files first:
 - Actual bitstream: `adc_ddr_corrected_202.bit`
 - Actual debug probes: `adc_ddr_corrected_202.ltx`
 
-In a **separate clone** of the project, regenerate local IP as needed, run synthesis and implementation, inspect `report_timing_summary`, `report_drc`, and `report_bus_skew`, then generate bitstream. Compare the resulting outputs with the original export manifest, taking into account non-deterministic implementation results. **No clean cloned-project rebuild is claimed in this repository yet.**
+In a **separate clone** of the project, regenerate local IP as needed, run synthesis and implementation, inspect `report_timing_summary`, `report_drc`, and `report_bus_skew`, then generate bitstream. Compare the resulting outputs with the original export manifest, taking into account non-deterministic implementation results. **A clean local Git-clone rebuild has now passed on the tested Windows PC. See FRESH_CLONE_BUILD.md.**
 
 ## 4. Test hardware safely
 
