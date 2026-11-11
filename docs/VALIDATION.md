@@ -1,48 +1,59 @@
 # Hardware validation and measured evidence
 
-## Setup recorded from the experiment
+## Precisely verified scope
 
-- Board: Red Pitaya STEMlab 125-14 **4-Input** with XC7Z020 FPGA.
-- Tool: Vivado 2025.2 on Windows, Digilent HS3 JTAG.
-- Firmware #1 (initial): `adc_validation_trial.bit` and matching `.ltx` from local Step 169/170.
-- Firmware #2 (corrected): `adc_ddr_corrected_202.bit` and matching `.ltx` from local Step 202.
-- Signal source: nominal 5 MHz sine wave, amplitude and connector placement **not independently recorded**.
-- Scope: ILA1 captured 4096 samples each; ILA 125 MHz rate is assumed from clocking constraints and should be verified for calibrated absolute-frequency claims.
+This repository contains two *real*, 4,096-sample ILA1 CSV exports from the Red Pitaya 125-14 4-Input FPGA validation sandbox, plus the corrected 202 bitstream and its matching probes.
 
-## Original capture
+- Board: Red Pitaya STEMlab **125-14 4-Input** (XC7Z020).
+- Vivado: **2025.2** on Windows, Digilent HS3 JTAG.
+- Original firmware: `fpga/releases/original_169/adc_validation_trial.bit`.
+- Corrected, **hardware-tested** firmware: `fpga/releases/corrected_202/adc_ddr_corrected_202.bit`.
+- Corrected JTAG programming succeeded; startup reported **HIGH**; **two ILA cores** were enumerated.
+- A separate **fresh local Git clone** of source commit `c3228aaadec7cb293c185ba077a1c8ef2f885d18` was independently synthesized, implemented, and generated a *new* bitstream and matching LTX on the same Windows computer. **The new bitstream has not been separately hardware-tested.** See [fresh-clone build](FRESH_CLONE_BUILD.md).
 
-Source: `evidence/data/original_5mhz_ch01.csv`, corresponding to Vivado Step 179. CH1 exhibited periodic but distorted readings. Dominant FFT **bin** of the signed CH1 capture was ~15.01465 MHz. Fitted single 5 MHz tone explained 15.245% of code variance.
+## Original vs corrected capture
 
-## Corrected capture
+| Measurement | Original signed CH1 | Corrected signed CH0 |
+|---|---:|---:|
+| Sample rows | 4096 | 4096 |
+| Nominal generator sine | 5 MHz | 5 MHz |
+| Frequency fitted assuming 125 MHz ILA rate | 5.000182 MHz | 5.000064 MHz |
+| Single-tone sine fit R² | 0.152454 | 0.999991 |
+| Residual RMS | 3459.83 codes | 9.50 codes |
+| Counter modulo-65536 continuity | PASS | PASS |
+| Synchronized ILA1 status | 0xF | 0xF |
 
-Source: `evidence/data/corrected_5mhz_ch01.csv`, corresponding to Vivado Step 205. CH0 showed a smooth sine. Dominant FFT **bin** was ~5.00488 MHz; interpolated regression frequency was ~5.000064 MHz. A single-tone sinusoid explained 99.99914% of measured variance; RMS residual 9.50 ADC codes.
+The original strongest signal appeared on **logical CH1**, while the corrected sine was measured on **logical CH0**. Physical SMA port, stimulus amplitude, attenuator position, offset, and connection changes were *not independently recorded*. This is not a calibrated, same-channel before/after test. A high R² is **not** a datasheet THD/ENOB or SINAD measurement.
 
-The two files are actual ILA exports with per-sample counters; sample indices run 0 through 4095 and counter values increment modulo 65536. Both show `status12_sync` = `0xF` throughout. A channel swap in observations between experiments is **unexplained pending confirmation of physical SMA input and RTL mapping**; avoid claims of identical-channel A/B comparison.
+The 125 MHz sample rate is consistent with the experimental clocking configuration but has not been separately calibrated for absolute frequency accuracy.
 
-## Reproduction
+## Reproduce from repository contents
 
-```bash
+```powershell
 python -m pip install -r requirements.txt
+python scripts/verify_export.py --require-source
 python scripts/analyze_capture.py --old evidence/data/original_5mhz_ch01.csv --new evidence/data/corrected_5mhz_ch01.csv --output evidence/results
 python -m unittest discover -s tests -v
 ```
 
-The generated `metrics.json` records capture identity, source frequency assumptions, sample count, fit, and evidence-specific limitations. It is not a general-purpose ADC datasheet qualification report.
+For a fresh **Vivado** rebuild, follow [README section 12](../README.md#12-clone-test-and-rebuild-a-bitstream). Do not open the copied historical `.xpr` expecting machine-portable absolute paths.
 
-## Verification coverage
+## Status bit map (verified from adc_ila_top.sv)
 
-| Check | Observed |
-|---|---|
-| FPGA JTAG programming | Successful, startup HIGH |
-| ILA cores enumerated | 2 |
-| Original + corrected CH0/CH1 captures | 4096 samples each |
-| 5 MHz corrected waveform | High-quality sine fit on CH0 |
-| Continuous captured counter | Yes, both files |
-| CH2/CH3 generator tests | Not documented |
-| Input amplitude / gain calibration | Not documented |
-| Multi-temperature / voltage corner testing | Not performed |
-| Clean exported-project rebuild | Must be run after local source export |
+- Bit 0: Clock Wizard 01 locked
+- Bit 1: Clock Wizard 23 locked
+- Bit 2: IDELAYCTRL ready
+- Bit 3: Calibration ready
 
-## Next laboratory work
+All bits were high in the recorded ILA1 captures. This indicates that the *reported internal flags* were asserted, not comprehensive ADC board qualification.
 
-Confirm physical input-to-channel correspondence, test all four SMA inputs at known amplitudes (begin within the verified LV/HV range), repeat capture at several frequencies, and derive external timing constraints using ADC/PCB clock-data skew rather than treating the present trial values as production-qualified.
+## Not yet done
+
+- Controlled CH0–CH3 (IN1–IN4) port-to-channel mapping and four-channel analog measurements
+- Documented generator amplitude, voltage range, attenuator, load and offset
+- Independent second-PC Vivado rebuild
+- Hardware retest of the separately rebuilt bitstream
+- Validated external timing budget across board/ADC delay and operating corners
+- Production CDC/metastability, DRC and methodology review
+
+The project is a **hardware-derived validation sandbox**, not full ADC-to-DDR DMA, VDIF or UDP streaming firmware.
