@@ -1,55 +1,28 @@
-# GitHub Publication
+# GitHub publication status and revision policy
 
-## Repository
+The FPGA validation repository was **published to the existing public** GitHub repository:
 
-Existing repository:
-https://github.com/SwastikAwasthi25/redpitayainput
+**https://github.com/SwastikAwasthi25/redpitayainput**
 
-The existing main branch contains an MIT LICENSE.
-Its history must be preserved.
+The existing repository's MIT LICENSE and Git commit history were preserved. The owner reported permission to share this project publicly.
 
-The actual FPGA source and measurement evidence have been
-integrated into the local adc-validation-review branch.
+## Content that was published
 
-## Verified
+- Actual exported FPGA RTL, XCI and BD, plus XDCs and a recorded SHA-256 provenance manifest (32 verified exported files)
+- Corrected hardware-tested FPGA bitstream and matching LTX, and preserved original comparison pair
+- Genuine 4,096-sample ILA exports, screenshots, numerical analysis and timing/DRC logs
+- A successful source-based fresh **local clone** rebuild procedure in `scripts/vivado_clean_rebuild.tcl`
+- A complete beginner-friendly [README](../README.md), including hardware limits and migration instructions
 
-- 32 exported files passed SHA-256 verification.
-- Corrected IDDR source was verified.
-- Automated evidence analysis passed.
-- Corrected FPGA bitstream was programmed via JTAG.
-- Two ILA cores were detected.
-- A corrected 5 MHz sine-wave capture was obtained.
+## Important limits
 
-## Limitations
+- The separately rebuilt bitstream was **not** subsequently reprogrammed for a new analog hardware test.
+- External ADC input timing constraints remain experimental; full four-channel analog qualification remains pending.
+- A clean rebuild on a **second** computer was not demonstrated.
+- The historical `.xpr` contains the original developer's absolute project path; use the checked-in fresh rebuild script instead.
 
-- Independent clean Vivado rebuild is not yet verified.
-- Four-channel analog operation is not fully validated.
-- External ADC input-delay assumptions require final review.
-- Physical channel mapping is not fully confirmed.
-- Vendor IP and institutional redistribution permissions
-  require manual confirmation.
-- The original XPR contains a machine-specific project path.
+## Attribution warning
 
-## Publication Policy
+The **root MIT license does not supersede third-party rights**. In particular, `spi_master.v` contains a separate 2010 Instrumentation Technologies “All Rights Reserved” copyright notice. Keep that notice and establish redistribution rights as appropriate; AMD IP and institutional terms may also apply.
 
-Do not overwrite the existing MIT LICENSE.
-Do not force-push or rewrite existing Git history.
-
-Before any public upload, review intellectual-property
-ownership, third-party IP licenses, institutional approval,
-and the visibility of the destination repository.
-
-The existing MIT license does not automatically grant
-redistribution rights for third-party or institutional IP.
-
-After approval, publish the reviewed local branch and
-merge it into main through the normal GitHub review process.
-
-Do not use scripts/publish_private.ps1: it is intended
-for creating a separate repository.
-
-## Scientific Scope
-
-This repository documents an experimentally validated
-ADC DDR reconstruction correction. It is not a claim
-of production readiness or complete four-channel sign-off.
+For future changes, commit to a reviewed branch, rerun evidence/source checks, and use an ordinary GitHub pull request. Do not force-push or rewrite the existing history. The old `scripts/publish_private.ps1` creates a separate repository and should **not** be used for maintaining this published repository.
