@@ -11,6 +11,14 @@ This repository contains two *real*, 4,096-sample ILA1 CSV exports from the Red 
 - Corrected JTAG programming succeeded; startup reported **HIGH**; **two ILA cores** were enumerated.
 - A separate **fresh local Git clone** of source commit `c3228aaadec7cb293c185ba077a1c8ef2f885d18` was independently synthesized, implemented, and generated a *new* bitstream and matching LTX on the same Windows computer. **The new bitstream has not been separately hardware-tested.** See [fresh-clone build](FRESH_CLONE_BUILD.md).
 
+## Additional four-channel hardware observations — 12 November 2026
+
+A subsequent experiment produced two new 4,096-sample Vivado ILA captures: ILA1 for **CH0/CH1** and ILA2 for **CH2/CH3**. All four logical channels showed 5 MHz-consistent fitted sinusoids (**R² 0.998488–0.998615**), exact raw-to-signed 14-bit formatting, continuous counters and status `0xF`.
+
+See the complete channel-specific measurements, acquisition restrictions, and SHA-256 provenance in [Four-channel ILA capture validation](FOUR_CHANNEL_VALIDATION_20261112.md).
+
+These acquisitions were **separate**, not a synchronous four-channel snapshot. Their `.ila` archives alone cannot establish which particular `.bit` file had been programmed. The original/corrected release comparison below is an **earlier, distinct experiment**.
+
 ## Original vs corrected capture
 
 | Measurement | Original signed CH1 | Corrected signed CH0 |
@@ -49,7 +57,7 @@ All bits were high in the recorded ILA1 captures. This indicates that the *repor
 
 ## Not yet done
 
-- Controlled CH0–CH3 (IN1–IN4) port-to-channel mapping and four-channel analog measurements
+- Controlled CH0–CH3 (IN1–IN4) port-to-channel mapping, simultaneous four-channel capture and calibrated analog measurements
 - Documented generator amplitude, voltage range, attenuator, load and offset
 - Independent second-PC Vivado rebuild
 - Hardware retest of the separately rebuilt bitstream
