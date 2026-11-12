@@ -1,0 +1,9 @@
+capture,channel,channel_path,sample_count,min_adc_code,min_at_sample,max_adc_code,max_at_sample,peak_to_peak_codes,mean_adc_code,distinct_status_values,status_hex_if_constant
+before_8_cycle_alignment,CH0,Direct,4096,-238,307,147,621,385,-46.308,1,7
+before_8_cycle_alignment,CH1,Direct,4096,-202,1187,175,2996,377,-13.573,1,7
+before_8_cycle_alignment,CH2,Async FIFO,4096,-227,1316,138,8,365,-44.877,1,7
+before_8_cycle_alignment,CH3,Async FIFO,4096,-230,565,133,1004,363,-49.163,1,7
+after_8_cycle_alignment,CH0,8-cycle delayed,4096,-235,2920,144,3608,379,-46.968,1,7
+after_8_cycle_alignment,CH1,8-cycle delayed,4096,-204,1295,175,2232,379,-14.976,1,7
+after_8_cycle_alignment,CH2,Async FIFO,4096,-229,294,139,1983,368,-46.300,1,7
+after_8_cycle_alignment,CH3,Async FIFO,4096,-232,794,130,3733,362,-50.848,1,7

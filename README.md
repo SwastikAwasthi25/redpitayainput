@@ -1,13 +1,15 @@
 # Red Pitaya 4-Channel ADC — Complete FPGA Architecture & Reproducible Validation
 
+> **Experimental variant added — 12 November 2026:** In addition to the original two-ILA source snapshot and release, this repository includes a separately selectable **single-ILA four-channel two's-complement overlay** with an experimental **8-ADC0-clock CH0/CH1 register delay**. It was synthesized, routed and tested over HS3 JTAG on the Red Pitaya 4-input board. At 1 MHz, CH2/CH3's apparent lag versus CH0 moved from +7.767/+7.744 samples to -0.274/-0.253 samples after compensation. This is **observed sinusoidal phase alignment**, not proven simultaneous ADC sampling or absolute FIFO latency. See the **[alignment hardware report](docs/SINGLE_ILA_8CYCLE_ALIGNMENT_20261112.md)**, [sample extrema CSV](evidence/analysis/adc_1mhz_before_after_min_max_summary.csv), and [analysis script](scripts/analyze_single_ila_alignment.py). **The original release artifacts and default exported RTL snapshot have not been replaced.** CDC, ADC I/O timing and long-term FIFO stability remain open before production deployment.
+
 **Technical documentation, RTL architecture, reproducibility and experimental validation.**  
 **Test platform:** Red Pitaya STEMlab **125-14 4-Input** · Zynq **XC7Z020CLG400-1** · two LTC2145-14 dual-channel ADCs · **14 bits/channel** · nominal **125 MS/s/channel** · AMD Vivado **2025.2**.
 
-> **Proven:** Working corrected FPGA bitstream programmed over HS3 JTAG; two ILA cores detected; a 4,096-sample 5 MHz capture gives sine-fit R² ≈ **0.999991** on the observed channel. A **separate clean local Git clone** was also successfully synthesized, implemented and compiled into a new bitstream using Vivado 2025.2.
+> **Baseline two-ILA source/release (sections below):** Working corrected FPGA bitstream programmed over HS3 JTAG; two ILA cores detected; a 4,096-sample 5 MHz capture gives sine-fit R² ≈ **0.999991** on the observed channel. A **separate clean local Git clone** was also successfully synthesized, implemented and compiled into a new bitstream using Vivado 2025.2.
 >
 > **Newly verified (12 November 2026):** All four logical ADC channels produced 5 MHz-consistent sinusoidal data in two separate, 4,096-sample Vivado ILA captures. Both sample counters incremented continuously, ready/status flags stayed `0xF`, and the exact 14-bit raw-to-signed RTL mapping was confirmed. [Measured results and provenance](docs/FOUR_CHANNEL_VALIDATION_20261112.md).
 >
-> **Not yet proven:** Controlled physical connector-to-logical channel mapping, simultaneous four-channel acquisition, calibrated ADC performance, final PCB/ADC timing sign-off, a second-computer rebuild, or a hardware retest conclusively attributed to the separately rebuilt bitstream.
+> **Not yet proven for the baseline release:** Controlled physical connector-to-logical channel mapping, simultaneous four-channel acquisition, calibrated ADC performance, final PCB/ADC timing sign-off, a second-computer rebuild, or a hardware retest conclusively attributed to the separately rebuilt bitstream.
 >
 > **Self-contained design:** No PuzzleFW download, earlier firmware project, original PC folders or external project Tcl is needed. The actual RTL, IP configurations, Block Design, constraints, tested build Tcl, two recorded bitstream/probe pairs, CSVs and reports are in this repository. Building/programming still requires Vivado and suitable physical hardware.
 
