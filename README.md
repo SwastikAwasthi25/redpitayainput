@@ -5,7 +5,7 @@
 
 > **Proven:** Working corrected FPGA bitstream programmed over HS3 JTAG; two ILA cores detected; a 4,096-sample 5 MHz capture gives sine-fit R² ≈ **0.999991** on the observed channel. A **separate clean local Git clone** was also successfully synthesized, implemented and compiled into a new bitstream using Vivado 2025.2.
 >
-> **Newly verified (12 November 2026):** All four logical ADC channels produced 5 MHz-consistent sinusoidal data in two separate, 4,096-sample Vivado ILA captures. Both sample counters incremented continuously, ready/status flags stayed \`0xF\`, and the exact 14-bit raw-to-signed RTL mapping was confirmed. [Measured results and provenance](docs/FOUR_CHANNEL_VALIDATION_20261112.md).
+> **Newly verified (12 November 2026):** All four logical ADC channels produced 5 MHz-consistent sinusoidal data in two separate, 4,096-sample Vivado ILA captures. Both sample counters incremented continuously, ready/status flags stayed `0xF`, and the exact 14-bit raw-to-signed RTL mapping was confirmed. [Measured results and provenance](docs/FOUR_CHANNEL_VALIDATION_20261112.md).
 >
 > **Not yet proven:** Controlled physical connector-to-logical channel mapping, simultaneous four-channel acquisition, calibrated ADC performance, final PCB/ADC timing sign-off, a second-computer rebuild, or a hardware retest conclusively attributed to the separately rebuilt bitstream.
 >
@@ -335,7 +335,7 @@ The newly analyzed hardware captures cover **all four logical channels**. Two **
 | Peak amplitude (codes) | 174.12 | 177.69 | 171.88 | 170.47 |
 | Raw/signed 14-bit conversion | PASS | PASS | PASS | PASS |
 
-For **ILA1** and **ILA2**, each 16-bit sample counter incremented by +1 through all 4,095 adjacent transitions, and recorded status remained **\`0xF\`**. Frequency estimates assume the nominal 125 MHz sample clock; these fits do not establish THD, SINAD, ENOB, input calibration or physical SMA mapping. These archives do not establish which bitstream was loaded. See [full November 12 measurement report and SHA-256 fingerprints](docs/FOUR_CHANNEL_VALIDATION_20261112.md).
+For **ILA1** and **ILA2**, each 16-bit sample counter incremented by +1 through all 4,095 adjacent transitions, and recorded status remained **`0xF`**. Frequency estimates assume the nominal 125 MHz sample clock; these fits do not establish THD, SINAD, ENOB, input calibration or physical SMA mapping. These archives do not establish which bitstream was loaded. See [full November 12 measurement report and SHA-256 fingerprints](docs/FOUR_CHANNEL_VALIDATION_20261112.md).
 
 ### Earlier baseline capture and DDR correction
 
@@ -526,7 +526,7 @@ A new computer must still have its own legally installed toolchain, confirm that
 
 **Verified:** 32 exported files SHA-256 matched; corrected RTL present; Python evidence test passed; original corrected `impl_adc_fix_200` had positive reported timing under experimental XDC; hardware programming succeeded with **two ILAs**; a high-quality sine was recorded; a separate clean local Git clone generated a new bitstream and debug probes.
 
-**New evidence — 12 November 2026:** Four logical ADC channels (CH0–CH3) now have separate 4,096-sample ILA captures with 5 MHz-consistent fitted sinusoids, raw/signed bit-exact conversions, continuous sample counters and ready status \`0xF\`. This is **four-channel digital capture observation**, not proof of calibrated or simultaneously acquired four-channel analog performance. Full results and artifact SHA-256 fingerprints: [Four-channel ILA measurement report](docs/FOUR_CHANNEL_VALIDATION_20261112.md).
+**New evidence — 12 November 2026:** Four logical ADC channels (CH0–CH3) now have separate 4,096-sample ILA captures with 5 MHz-consistent fitted sinusoids, raw/signed bit-exact conversions, continuous sample counters and ready status `0xF`. This is **four-channel digital capture observation**, not proof of calibrated or simultaneously acquired four-channel analog performance. Full results and artifact SHA-256 fingerprints: [Four-channel ILA measurement report](docs/FOUR_CHANNEL_VALIDATION_20261112.md).
 
 **Pending:** Physical IN1–IN4/SMA-to-RTL mapping, independently controlled source levels per channel, calibrated input amplitude/performance, simultaneous four-channel acquisition evidence, production external setup/hold model, wider CDC review, repeat build on a separate PC, and confirmation that the *freshly rebuilt* bitstream was programmed for the new captures.
 
