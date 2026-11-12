@@ -143,6 +143,40 @@ module adc_ila_top (
     wire [13:0] adc_twos_ch0 = adc_raw[0] ^ 14'h2000;
     wire [13:0] adc_twos_ch1 = adc_raw[1] ^ 14'h2000;
 
+    // EXPERIMENTAL phase compensation based on observed ~7.7-7.9 sample
+    // lag of the FIFO-fed CH2/CH3 pair, measured at 1 and 5 MHz.
+    // Delay CH0/CH1 by exactly 8 clock-0 cycles in the ILA presentation.
+    // This neither changes the ADC captures nor fixes CDC clock phase.
+    localparam integer DIRECT_PHASE_DELAY = 8;
+    logic [13:0] ch0_delay_pipe [0:DIRECT_PHASE_DELAY-1];
+    logic [13:0] ch1_delay_pipe [0:DIRECT_PHASE_DELAY-1];
+    integer delay_idx;
+    always_ff @(posedge adc_sample_clk[0]) begin
+        ch0_delay_pipe[0] <= adc_twos_ch0;
+        ch1_delay_pipe[0] <= adc_twos_ch1;
+        for (delay_idx = 1; delay_idx < DIRECT_PHASE_DELAY;
+             delay_idx = delay_idx + 1) begin
+            ch0_delay_pipe[delay_idx] <= ch0_delay_pipe[delay_idx-1];
+            ch1_delay_pipe[delay_idx] <= ch1_delay_pipe[delay_idx-1];
+        end
+    end
+    wire [13:0] adc_twos_ch0_delayed =
+        ch0_delay_pipe[DIRECT_PHASE_DELAY-1];
+    wire [13:0] adc_twos_ch1_delayed =
+        ch1_delay_pipe[DIRECT_PHASE_DELAY-1];
+
+    // Qualify probe5[0] only after the 8-cycle pipeline contains
+    // post-calibration samples; no extra CDC paths are introduced.
+    logic [DIRECT_PHASE_DELAY-1:0] ch01_delay_valid = '0;
+    always_ff @(posedge adc_sample_clk[0]) begin
+        if (!reset12_n)
+            ch01_delay_valid <= '0;
+        else
+            ch01_delay_valid <= {ch01_delay_valid[DIRECT_PHASE_DELAY-2:0],
+                                 status12_sync[3]};
+    end
+    wire ch01_aligned_valid = ch01_delay_valid[DIRECT_PHASE_DELAY-1];
+
     // Both channels from ADC pair 2 share clk34 and must cross together.
     // Packing them into one FIFO word preserves their mutual sample pairing.
     wire [27:0] fifo_din = {
@@ -278,25 +312,26 @@ module adc_ila_top (
     // Reuse the already-exported 6-probe/4096-depth adc_ila_12 IP.
     // Only ONE ILA is instantiated in this variant, clocked by CH0/CH1.
     //
-    // probe0: signed 14-bit CH0 offset-binary -> two's complement
-    // probe1: signed 14-bit CH1 offset-binary -> two's complement
+    // probe0: CH0 two's complement delayed 8 ADC0 cycles
+    // probe1: CH1 two's complement delayed 8 ADC0 cycles
     // probe2: signed 14-bit CH2 via async FIFO; trust only if probe5[2]
     // probe3: signed 14-bit CH3 via async FIFO; trust only if probe5[2]
     // probe4: 16-bit CH0/CH1 sample counter
     // probe5: [3] FIFO drop observed in source (sticky, synchronized)
     //         [2] FIFO data valid at probe2/probe3
     //         [1] CH2/CH3 source readiness (synchronized)
-    //         [0] CH0/CH1 calibration readiness
-    // IMPORTANT: CH0/CH1 and CH2/CH3 are NOT time aligned.
+    //         [0] CH0/CH1 calibrated + direct delay pipeline filled
+    // IMPORTANT: experimental phase compensation does NOT establish
+    // absolute source-clock sample alignment or guaranteed lossless FIFO.
     wire [3:0] single_ila_status = {
         cdc_drop_sync[1], cdc_valid,
-        cdc_ready_sync[1], status12_sync[3]
+        cdc_ready_sync[1], ch01_aligned_valid
     };
 
     adc_ila_12 u_ila_4ch (
         .clk   (adc_sample_clk[0]),
-        .probe0(adc_twos_ch0),
-        .probe1(adc_twos_ch1),
+        .probe0(adc_twos_ch0_delayed),
+        .probe1(adc_twos_ch1_delayed),
         .probe2(adc_twos_ch2),
         .probe3(adc_twos_ch3),
         .probe4(counter12),
