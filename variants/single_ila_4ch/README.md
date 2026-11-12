@@ -1,8 +1,8 @@
 # Experimental single-ILA four-channel two's-complement capture
 
-**Branch-specific status:** This **8-cycle-compensation experimental branch** has passed synthesis and routing and was tested on actual 1 MHz hardware through a single ILA (2026-11-12). The parent single-ILA feature branch is a separate, non-delayed trial; neither is a production-signed-off release. See [detailed results](../../docs/SINGLE_ILA_8CYCLE_ALIGNMENT_20261112.md).
+**Experiment status (2026-11-12):** The **8-cycle-compensation overlay** passed synthesis/routing and was tested on 1 MHz hardware through a single ILA. The prior single-ILA feature branch has a separate, non-delayed variant. Neither is a production-signed-off design. See [detailed results](../../docs/SINGLE_ILA_8CYCLE_ALIGNMENT_20261112.md).
 
-The existing professor-facing `main` branch is unchanged. This is a separate design variant with a new `adc_ila_top.sv` **overlay**. All the original 32 SHA-256-tracked source/release/report artifacts stay untouched.
+The original professor-facing **two-ILA source snapshot and release artifacts** are unchanged. This is a separate selectable design variant implemented as an `adc_ila_top.sv` **overlay**. The original 32 SHA-256-tracked source/release/report artifacts stay untouched.
 
 ## Goal
 
@@ -67,7 +67,7 @@ If implementation succeeds and detailed CDC/timing/DRC review is acceptable, the
 1. Ensure single-ILA hierarchy, four two's-complement probe buses, 28-bit FIFO width, two separate sample clocks, correct reset sequencing and no stale cached IP.
 2. Review synthesis/implementation warnings and output `report_cdc`/`report_timing_summary`/`report_drc`. Check FPGA resources and clock constraints; no blanket false-path exception should hide sample bus crossings.
 3. Check FIFO full/empty/busy behavior with two clocks whose relative frequencies differ slightly; determine whether continuous samples can be lost and how to document the drop flag.
-4. Confirm that XPM/FPGA primitive connectivity meets Vivado 2025.2 design-rule checks; further changes may be required. This branch has **not** yet been tested in Vivado.
+4. Confirm that XPM/FPGA primitive connectivity meets Vivado 2025.2 design-rule checks; further changes may be required. This overlay has been **synthesized, routed, and hardware-tested at 1 MHz** as recorded in the dated experiment report. Further CDC and production sign-off remain required.
 5. **Do not program experimental hardware before the above checks pass.** Keep the previously tested corrected bitstream in `fpga/releases/corrected_202/` as the known-good fallback.
 
 ## Why not just wire CH2/CH3 into one ILA?
@@ -76,4 +76,4 @@ Vivado ILA has a **single capture clock**. Sampling a multi-bit, continuously ch
 
 ## Follow-up work
 
-After an actual trial synthesis/implementation pass: review CDC, inspect the single ILA on hardware, validate that `probe5[2]` (data valid) and `probe5[3]` (FIFO dropped data) behave as expected, capture all four two's-complement values, and compare with the earlier two-ILA baseline. This is **an experimental design variant**, not a retrospective claim that the published hardware tests were done with one ILA.
+For further controlled hardware testing: review CDC, inspect the single ILA on hardware, validate that `probe5[2]` (data valid) and `probe5[3]` (FIFO dropped data) behave as expected, capture all four two's-complement values, and compare with the earlier two-ILA baseline. This is **an experimental design variant**, not a retrospective claim that the published hardware tests were done with one ILA.
