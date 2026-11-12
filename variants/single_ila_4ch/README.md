@@ -1,6 +1,6 @@
 # Experimental single-ILA four-channel two's-complement capture
 
-**Status: RTL and isolated Vivado build script prepared; not yet simulated, synthesized, implemented, or hardware-tested. Do not use this trial image as the already verified four-channel release.**
+**Branch-specific status:** This **8-cycle-compensation experimental branch** has passed synthesis and routing and was tested on actual 1 MHz hardware through a single ILA (2026-11-12). The parent single-ILA feature branch is a separate, non-delayed trial; neither is a production-signed-off release. See [detailed results](../../docs/SINGLE_ILA_8CYCLE_ALIGNMENT_20261112.md).
 
 The existing professor-facing `main` branch is unchanged. This is a separate design variant with a new `adc_ila_top.sv` **overlay**. All the original 32 SHA-256-tracked source/release/report artifacts stay untouched.
 
@@ -20,25 +20,32 @@ Display **four 14-bit two's-complement ADC channels in one Vivado ILA core**, ra
 
 | Probe | Width | Value |
 |---|---:|---|
-| `probe0` | 14 | CH0 true two's-complement sample |
-| `probe1` | 14 | CH1 true two's-complement sample |
+| `probe0` | 14 | CH0 two's-complement sample **after 8 CLK0 cycles** |
+| `probe1` | 14 | CH1 two's-complement sample **after 8 CLK0 cycles** |
 | `probe2` | 14 | CH2 two's-complement sample after asynchronous FIFO |
 | `probe3` | 14 | CH3 two's-complement sample after asynchronous FIFO |
 | `probe4` | 16 | Native CH0/CH1 sample-clock counter |
-| `probe5` | 4 | bit 3: synchronized FIFO-drop sticky; bit 2: FIFO data valid for probes 2/3; bit 1: synchronized CH2/CH3 source readiness; bit 0: CH0/CH1 calibration ready |
+| `probe5` | 4 | bit 3: synchronized FIFO-drop sticky; bit 2: FIFO data valid for probes 2/3; bit 1: synchronized CH2/CH3 source readiness; bit 0: CH0/CH1 calibrated **and direct 8-cycle pipeline filled** |
 
-**Important:** A line at a particular ILA sample index is **not a simultaneous 4-channel ADC sampling instant**. Samples CH2/CH3 have passed through a FIFO and include variable latency relative to CH0/CH1. To prove cross-pair phase coherence or simultaneity requires timestamps, clock relationship analysis, elastic buffering/clock alignment, and appropriate measurement. **CDC validation must not be skipped before hardware use.**
+**Important:** An 8-cycle register pipeline helps visually compensate the measured sine-wave phase but **does not prove all four ADC samples correspond to one physical sampling instant**. A line at a particular ILA sample index is **not necessarily a simultaneous 4-channel ADC sampling instant**. Samples CH2/CH3 pass through a FIFO, and the apparent delay can vary with clock phase, occupancy, and sampling conditions; direct channels on this branch use a fixed 8-cycle compensation. To prove cross-pair phase coherence or simultaneity requires timestamps, clock relationship analysis, elastic buffering/clock alignment, and appropriate measurement. **CDC validation must not be skipped before hardware use.**
 
 ### Read the signed probes properly
 
 In Vivado Hardware Manager choose `Signed Decimal` and analog wave plotting with a suitable fixed Y range for probes 0–3. This changes the *display interpretation* only; the RTL performs the true offset-binary→two's-complement conversion.
+
+
+### Experiment-specific evidence and build note
+
+The trial-builder commands below are for **fresh independent builds** with new output folders. They do not reproduce the exact historical local paths used in the 2026-11-12 alignment hardware experiment. That hardware test used source commit `d654dc5`, `scripts/vivado_single_ila_synth_only.tcl`, then a separate routed Vivado run and bitstream/probe export; hashes, timing, warnings, phase analysis and outstanding gates are recorded in the [dated experiment report](../../docs/SINGLE_ILA_8CYCLE_ALIGNMENT_20261112.md).
+
+For the variant's actual firmware, refer to `adc_twos_ch0_delayed` and `adc_twos_ch1_delayed`; do not confuse them with non-delayed probe labels in older screenshots or documentation.
 
 ## Build the experimental variant on Windows
 
 Prerequisites: same as the original successful clean clone (Vivado **2025.2**, correct FPGA device support, Git). Use **space-free paths**, and a new output directory separate from any historical builds:
 
 ```powershell
-git clone --branch feature/single-ila-4ch-twos-complement-20261112 https://github.com/SwastikAwasthi25/redpitayainput.git D:\rp_adc_single_ila_trial
+git clone --branch experiment/adc-direct-8clk-alignment-20261112 https://github.com/SwastikAwasthi25/redpitayainput.git D:\rp_adc_single_ila_trial
 New-Item -ItemType Directory -Path D:\rp_adc_single_ila_build
 
 python D:\rp_adc_single_ila_trial\scripts\verify_export.py --require-source
