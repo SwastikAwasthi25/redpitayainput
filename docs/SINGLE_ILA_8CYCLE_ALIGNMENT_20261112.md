@@ -1,6 +1,6 @@
 # Single-ILA ADC four-channel experiment: 8-cycle phase compensation (2026-11-12)
 
-> **Branch:** `experiment/adc-direct-8clk-alignment-20261112` (unmerged experimental work). **Status:** synthesized, placed/routed and tested on a Red Pitaya STEMlab 125-14 4-Input using Vivado 2025.2 and HS3 JTAG. This is **not** production CDC/ADC timing sign-off. The original `main` two-ILA release and original single-ILA trial variant remain separate.
+> **Source lineage:** `experiment/adc-direct-8clk-alignment-20261112`, integrated as a **separately selectable experimental RTL overlay** while preserving the original two-ILA source snapshot and release artifacts. **Status:** synthesized, placed/routed and tested on a Red Pitaya STEMlab 125-14 4-Input using Vivado 2025.2 and HS3 JTAG. This is **not** production CDC/ADC timing sign-off; merging the source into the repository does not qualify the image for deployment.
 
 ## Objective
 
@@ -79,7 +79,7 @@ The routed experiment used source commit `d654dc5` in an isolated clone `D:/rp_a
 - Experimental phase-compensation bitstream `D:/rp_adc_align8_synth_255/align8_step273.bit`, SHA256 `6066FF1A08029E5132DCEBD40A293CE7341DE090C98FDD5313AD228B4B402009`.
 - Experimental probes `D:/rp_adc_align8_synth_255/align8_step273.ltx`, SHA256 `2CE5D1678FAB21F460E2D724ABA4B508F77D7080E7815D44F25023A60EE6F829`.
 
-These Windows paths identify the local build outputs; **this documentation does not imply that the bitstreams or LTX files were uploaded to GitHub**. Always use the matching .bit/.ltx pair. JTAG programming changes volatile FPGA configuration; neither flash nor `main` was updated.
+These Windows paths identify the local build outputs; **this documentation does not imply that the bitstreams or LTX files were uploaded to GitHub**. Always use the matching .bit/.ltx pair. JTAG programming changes volatile FPGA configuration; neither flash nor the original two-ILA RTL snapshot/release was updated.
 
 ## Trigger experiment (19:33–19:39 IST, 2026-11-12)
 
@@ -87,7 +87,7 @@ Vivado screenshots show a signed `probe0` comparator value of `100` on the **del
 
 ## How to reproduce
 
-1. Switch to this experimental branch. Use a new clean clone, never edit the archived source snapshot, known-good bitstream or `main`.
+1. Select the experimental RTL overlay and run a new clean clone/build. Never modify the archived original source snapshot or known-good release bitstream.
 2. The existing `scripts/vivado_single_ila_synth_only.tcl` creates an isolated Vivado 2025.2 project from exported RTL/IP/BD/XDC and substitutes the overlay `variants/single_ila_4ch/adc_ila_top.sv`. Review synthesis/CDC and route/timing/DRC/bus-skew reports before generating a candidate bitstream.
 3. With the board on verified safe analog levels, program candidate JTAG bitstream with **matching** LTX; verify exactly one ILA and signal status `0x7`.
 4. Export 4096 samples at known generator frequency; use [the analyzer](../scripts/analyze_single_ila_alignment.py) to compare channel phase and check counter/status.
@@ -99,4 +99,4 @@ Vivado screenshots show a signed `probe0` comparator value of `100` on the **del
 - Long-running continuous capture/FIFO-depth monitoring, backpressure/overflow and frequency-drift tests.
 - Absolute sample age and cross-chip sample-instant alignment using common reference/markers, not periodic sine alone.
 - Independently review CDC clock interaction, ADC input setup/hold budget, unresolved DRC and unconstrained I/O before deployable sign-off.
-- Decide later whether to merge any experimental work into release branches. **Do not merge this experiment into `main` yet.**
+- Keep this variant explicitly experimental even when source/documentation resides on the default Git branch; do not replace the verified two-ILA release or deploy the experimental bitstream until remaining checks pass.
