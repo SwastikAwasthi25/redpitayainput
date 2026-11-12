@@ -176,11 +176,25 @@ module adc_ila_top (
     always_ff @(posedge adc_sample_clk[1]) begin
         cdc_fifo_rst <= !cdc_source_ready;
     end
-    wire cdc_wr_en = cdc_source_ready && !cdc_fifo_rst &&
-                     !cdc_wr_rst_busy && !cdc_full;
+    // RAMB36E1 control pins must not be directly driven by flops with
+    // asynchronous resets. Qualify the FIFO enables using local-clocked
+    // registers that have no asynchronous set/reset (REQP-1839).
+    //
+    // Explicit initialization is synthesizable for the target 7-series FPGA.
+    // Reset/startup conditions are sampled on the respective ADC clock.
+    logic cdc_wr_armed = 1'b0;
+    always_ff @(posedge adc_sample_clk[1]) begin
+        cdc_wr_armed <= cdc_source_ready && !cdc_fifo_rst &&
+                        !cdc_wr_rst_busy;
+    end
+    wire cdc_wr_en = cdc_wr_armed && !cdc_full && !cdc_wr_rst_busy;
 
     // Consumer domain is CH0/CH1's sample clock (sample-clock domain 0).
-    wire cdc_valid = !cdc_empty && !cdc_rd_rst_busy && reset12_n;
+    logic cdc_rd_armed = 1'b0;
+    always_ff @(posedge adc_sample_clk[0]) begin
+        cdc_rd_armed <= reset12_n && !cdc_rd_rst_busy;
+    end
+    wire cdc_valid = cdc_rd_armed && !cdc_empty && !cdc_rd_rst_busy;
     wire cdc_rd_en = cdc_valid;
 
     // Count or flag *lost samples* when the source cannot enqueue one
