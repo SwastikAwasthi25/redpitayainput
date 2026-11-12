@@ -1,17 +1,19 @@
 # Red Pitaya 4-Channel ADC — Complete FPGA Architecture & Reproducible Validation
 
-**A start-to-finish guide for beginners and researchers.**  
+**Technical documentation, RTL architecture, reproducibility and experimental validation.**  
 **Test platform:** Red Pitaya STEMlab **125-14 4-Input** · Zynq **XC7Z020CLG400-1** · two LTC2145-14 dual-channel ADCs · **14 bits/channel** · nominal **125 MS/s/channel** · AMD Vivado **2025.2**.
 
 > **Proven:** Working corrected FPGA bitstream programmed over HS3 JTAG; two ILA cores detected; a 4,096-sample 5 MHz capture gives sine-fit R² ≈ **0.999991** on the observed channel. A **separate clean local Git clone** was also successfully synthesized, implemented and compiled into a new bitstream using Vivado 2025.2.
 >
-> **Not yet proven:** A complete controlled four-channel test, calibrated ADC performance, production-grade PCB/ADC timing constraints, a rebuild on a second computer, or a separate hardware retest of the newly rebuilt bitstream.
+> **Newly verified (12 November 2026):** All four logical ADC channels produced 5 MHz-consistent sinusoidal data in two separate, 4,096-sample Vivado ILA captures. Both sample counters incremented continuously, ready/status flags stayed \`0xF\`, and the exact 14-bit raw-to-signed RTL mapping was confirmed. [Measured results and provenance](docs/FOUR_CHANNEL_VALIDATION_20261112.md).
+>
+> **Not yet proven:** Controlled physical connector-to-logical channel mapping, simultaneous four-channel acquisition, calibrated ADC performance, final PCB/ADC timing sign-off, a second-computer rebuild, or a hardware retest conclusively attributed to the separately rebuilt bitstream.
 >
 > **Self-contained design:** No PuzzleFW download, earlier firmware project, original PC folders or external project Tcl is needed. The actual RTL, IP configurations, Block Design, constraints, tested build Tcl, two recorded bitstream/probe pairs, CSVs and reports are in this repository. Building/programming still requires Vivado and suitable physical hardware.
 
 ![Original versus corrected 5 MHz hardware ILA capture](evidence/plots/before_after_hardware.png)
 
-## Read this README in order
+## Documentation index
 
 1. [Goal and basic concepts](#1-goal-and-basic-concepts)
 2. [Hardware: what connects to what](#2-hardware-what-connects-to-what)
@@ -34,7 +36,7 @@
 
 ---
 
-## 1. Goal and basic concepts
+## 1. Objectives and system fundamentals
 
 **Problem:** Four ADC channels are each nominally sampled 125 million times per second with 14-bit precision. Their chips send the samples to the FPGA through only **seven data wires per channel**, with **one bit per wire on each clock edge**. The FPGA must recover the correct 14-bit word from rising/falling edge data, without mixing bit order or sample cycles.
 
@@ -321,7 +323,23 @@ The original corrected routed design reported **global setup slack +1.139 ns** a
 
 ## 11. Evidence and measured results
 
-The included CSVs are **actual captured files**, not synthetic sine waves:
+### 12 November 2026 — Four-channel ILA verification
+
+The newly analyzed hardware captures cover **all four logical channels**. Two **separate** ILA acquisitions provided 4,096 samples per ILA:
+
+| Metric | CH0 · ILA1 | CH1 · ILA1 | CH2 · ILA2 | CH3 · ILA2 |
+|---|---:|---:|---:|---:|
+| Fitted frequency (MHz)* | 5.000046 | 5.000067 | 5.000061 | 5.000087 |
+| Sine-fit R² | **0.998580** | **0.998615** | **0.998488** | **0.998532** |
+| Residual RMS (codes) | 4.64 | 4.68 | 4.73 | 4.62 |
+| Peak amplitude (codes) | 174.12 | 177.69 | 171.88 | 170.47 |
+| Raw/signed 14-bit conversion | PASS | PASS | PASS | PASS |
+
+For **ILA1** and **ILA2**, each 16-bit sample counter incremented by +1 through all 4,095 adjacent transitions, and recorded status remained **\`0xF\`**. Frequency estimates assume the nominal 125 MHz sample clock; these fits do not establish THD, SINAD, ENOB, input calibration or physical SMA mapping. These archives do not establish which bitstream was loaded. See [full November 12 measurement report and SHA-256 fingerprints](docs/FOUR_CHANNEL_VALIDATION_20261112.md).
+
+### Earlier baseline capture and DDR correction
+
+The included earlier CSVs are **actual captured files**, not synthetic sine waves:
 
 - [Original capture: 4,096 ILA rows](evidence/data/original_5mhz_ch01.csv)
 - [Corrected capture: 4,096 ILA rows](evidence/data/corrected_5mhz_ch01.csv)
@@ -348,14 +366,14 @@ The included CSVs are **actual captured files**, not synthetic sine waves:
 
 ### Required software and hardware
 
-| Task | You need |
+| Task | Requirements |
 |---|---|
-| Understand the project | This README; optionally a text editor |
+| Architecture and design review | This README and the checked-in RTL, XCI, BD and XDC files |
 | Run the published CSV analysis | Git + Python 3.10+ + packages in `requirements.txt` |
 | Generate a new FPGA bitstream | Git + **Vivado 2025.2** with suitable Zynq device support; source/IP are already included |
 | Program/test actual analog signals | Red Pitaya **4-Input** board, suitable power/JTAG adapter, Vivado Hardware Manager and safe signal generator |
 
-**A README cannot eliminate installed toolchain or physical hardware requirements.** It *does* eliminate the need to locate the author's original firmware workspace or another source repo.
+**Rebuilding requires a supported Vivado installation; reproducing the analog experiment also requires a compatible board and test equipment.** All repository-specific source inputs are included, without dependence on the original developer's workspace.
 
 ### Step A — clone to a folder with **no spaces**
 
@@ -504,17 +522,19 @@ A new computer must still have its own legally installed toolchain, confirm that
 | Build works but wave is absent | Input generator/attenuator, clock status, capture trigger | Check the physical stimulus and ILA status before changing RTL |
 | Different .bit output after rebuilding | Normal implementation variation or different inputs/tool versions | Compare source commit, reports and real behavior; don't demand identical bytes |
 
-## 16. What is verified and what remains
+## 16. Verification status and outstanding work
 
 **Verified:** 32 exported files SHA-256 matched; corrected RTL present; Python evidence test passed; original corrected `impl_adc_fix_200` had positive reported timing under experimental XDC; hardware programming succeeded with **two ILAs**; a high-quality sine was recorded; a separate clean local Git clone generated a new bitstream and debug probes.
 
-**Pending:** Controlled four-channel physical analog tests, IN1–IN4/SMA-to-RTL map, calibrated input amplitude/performance, production external setup/hold model, wider CDC review, repeat build on a separate PC, and hardware retest of the *freshly rebuilt* bitstream.
+**New evidence — 12 November 2026:** Four logical ADC channels (CH0–CH3) now have separate 4,096-sample ILA captures with 5 MHz-consistent fitted sinusoids, raw/signed bit-exact conversions, continuous sample counters and ready status \`0xF\`. This is **four-channel digital capture observation**, not proof of calibrated or simultaneously acquired four-channel analog performance. Full results and artifact SHA-256 fingerprints: [Four-channel ILA measurement report](docs/FOUR_CHANNEL_VALIDATION_20261112.md).
+
+**Pending:** Physical IN1–IN4/SMA-to-RTL mapping, independently controlled source levels per channel, calibrated input amplitude/performance, simultaneous four-channel acquisition evidence, production external setup/hold model, wider CDC review, repeat build on a separate PC, and confirmation that the *freshly rebuilt* bitstream was programmed for the new captures.
 
 **Do not claim** that this sandbox already includes VDIF, DMA, Ethernet or a full production acquisition system. Those are separate future integration stages.
 
-## 17. Step-by-step learning order and glossary
+## 17. Architecture review sequence and terminology
 
-For a newcomer or a student explaining this work to a supervisor:
+For a structured technical review, study the system in the following implementation order:
 
 | Lesson | Teach this next | Learning objective |
 |---|---|---|
